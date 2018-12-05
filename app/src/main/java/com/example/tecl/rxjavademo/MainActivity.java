@@ -1,8 +1,16 @@
 package com.example.tecl.rxjavademo;
 
+import android.content.Intent;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.example.tecl.rxjavademo.bean.HomePageInfo;
 import com.example.tecl.rxjavademo.net.ApiService;
@@ -22,13 +30,51 @@ import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
     private HomePageInfo homePageInfo;
-
+    private Toolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mToolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(mToolbar);
+        ActionBar actionBar = getSupportActionBar();
+        if(null!=actionBar){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            //如果想修改返回箭头图标
+            actionBar.setHomeAsUpIndicator(R.mipmap.ic_launcher);
+        }
         TestFun.getInstance().fun1();
+        getDate();
+    }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                Toast.makeText(this, "Home now",Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,SecondActivity.class));
+                break;
+            case R.id.action_backup:
+                Toast.makeText(this,"BackUp",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_delete:
+                break;
+            case R.id.action_settings:
+                break;
+        }
+
+        return true;
+    }
+
+    private void getDate(){
         HashMap map = new HashMap<String, String>();
         NetUtlis.getInstance().getUrlAndParams("app/index/getIndexData",map);
 
@@ -93,6 +139,5 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("SSSS","onComplete");
                     }
                 });
-
     }
 }

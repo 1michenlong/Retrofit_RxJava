@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Button
+        android:id="@+id/id_dependency"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:text="Dependency"
+        android:textColor="@color/colorAccent"
+        android:layout_margin="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:textAllCaps="false"/>
+
+    <TextView
+        android:id="@+id/id_child"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_margin="16dp"
+        android:layout_gravity="right"
+        android:text="Child"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:background="@android:color/holo_orange_light"
+        app:layout_behavior="com.example.tecl.rxjavademo.widget.MyBehavior"/>
+
+</android.support.design.widget.CoordinatorLayout>
